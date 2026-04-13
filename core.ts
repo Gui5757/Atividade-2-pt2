@@ -81,5 +81,22 @@ export class ToDo {
       throw new Error('Index out of bounds');
     return items[index];
   }
+
+  async markItemAsCompleted(index: number) {
+  const items = await this.items;
+
+  if (index < 0 || index >= items.length)
+    throw new Error('Index out of bounds');
+
+  const item = items[index];
+
+  if (!item)
+    throw new Error('Item not found');
+
+    item.updateDescription(`${item.toJSON().description} ✅`);
+    this.saveToFile();
+  }
 }
+
+
 
